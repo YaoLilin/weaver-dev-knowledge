@@ -2,7 +2,7 @@
 
 建模查询批量编辑保存时需要做必填校验
 
-![[Pasted image 20260413085311.png]]
+![](Pasted%20image%2020260421152032.png)
 ## 思路
 
 需要重写按钮的点击事件的逻辑，在事件内先执行自定义的逻辑，再执行原逻辑，也就是代理的操作
@@ -11,7 +11,7 @@
 
 这个没有包括下拉菜单
 
-![[Pasted image 20260413085334.png]]
+![](Pasted%20image%2020260421152148.png)
 
 1.获取 WeaTop 组件参数
 
@@ -58,8 +58,8 @@ function findBatchSaveButtonProps(props) {
 
 在点击批量保存时先进行自定义校验，通过后再执行原逻辑
 
-![[Pasted image 20260413085516.png]]
-![[Pasted image 20260413085524.png]]
+![](Pasted%20image%2020260421152207.png)
+![](Pasted%20image%2020260421152215.png)
 ```javascript
 // 重写顶部下拉按钮中的保存按钮逻辑
 ecodeSDK.overwritePropsFnQueueMapSet('Menu.Item', {
@@ -85,7 +85,7 @@ ecodeSDK.overwritePropsFnQueueMapSet('Menu.Item', {
 
 ## 重写右键菜单点击事件
 
-![[Pasted image 20260413085610.png]]
+![Pasted image 20260413085610.png](./files/Pasted_image_2026040713085610.png)
 1.获取 WeaRightMenu 组件参数
 
 2.替换参数中的 onClick 函数，该函数通过点击菜单触发，函数中有个参数用来判断是点击哪个菜单
@@ -114,7 +114,7 @@ ecodeSDK.overwritePropsFnQueueMapSet('WeaRightMenu', {
 
 ## 示例：批量修改点批量保存时弹出一个对话框，点击确定后再提交
 
-![[Pasted image 20260413085719.png|546]]
+![Pasted image 20260413085719.png](./files/Pasted_image_2026040713085719.png)
 
 ```javascript
 // 重写顶部保存按钮逻辑

@@ -3,9 +3,9 @@
 工具主页：[chii/README_CN.md at master · liriliri/chii · GitHub](https://github.com/liriliri/chii/blob/master/README_CN.md)
 ## 效果
 
-![[Pasted image 20260407165020.png]]
+![](Pasted%20image%2020260421152315.png)
 
-![[Pasted image 20260407165041.png]]
+![](Pasted%20image%2020260421152322.png)
 
 ## 使用方法
 
