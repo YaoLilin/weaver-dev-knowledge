@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "browser-use": {
+      "command": "/Users/yaolilin/Documents/Obsidian Vault/泛微开发/.qoder/venv/bin/python",
+      "args": [
+        "-m",
+        "browser_use.mcp_server"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+      }
+    }
+  }
+}

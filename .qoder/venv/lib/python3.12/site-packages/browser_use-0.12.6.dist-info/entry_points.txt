@@ -1,0 +1,6 @@
+[console_scripts]
+browser = browser_use.skill_cli.main:main
+browser-use = browser_use.skill_cli.main:main
+browser-use-tui = browser_use.cli:main
+browseruse = browser_use.skill_cli.main:main
+bu = browser_use.skill_cli.main:main
