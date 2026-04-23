@@ -1,8 +1,0 @@
-#!/bin/sh
-'''exec' "/Users/yaolilin/Documents/Obsidian Vault/泛微开发/.qoder/venv/bin/python3.12" "$0" "$@"
-' '''
-import sys
-from markdown_it.cli.parse import main
-if __name__ == '__main__':
-    sys.argv[0] = sys.argv[0].removesuffix('.exe')
-    sys.exit(main())
