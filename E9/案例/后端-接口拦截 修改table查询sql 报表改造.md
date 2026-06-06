@@ -1,12 +1,43 @@
+## 场景
+
+需要修改前端表格对应的 sql 语句，达到表格数据修改的效果
 ## 用法
 
 在后端做一个接口拦截
 
-![Pasted image 20260407095957.png](./files/Pasted_image_2026040707095957.png)
+```java
+@WeaIocReplaceComponent("DocBrowserIntercept")
+public class DocBrowserIntercept {
+
+    @WeaReplaceAfter(value = "/api/public/browser/data/9",order = 1,description = "")
+    public String after(WeaAfterReplaceParam param) throws Exception {
+        Map<String ,Object> params = param.getParamMap();
+        String  wid = Util.null2String(params.get("wfid"));
+        String  fieldId = Util.null2String(params.get("fieldid"));
+        JSONObject result = JSONObject.parseObject(param.getData());
+        String dataKey = result.getString("datas");
+        if (!"63".equals(wid) && !"7019".equals(fieldId)){
+            return param.getData();
+        }
+
+        DefaultWeaTable table = WeaTableTools.checkTableStringConfig(dataKey,DefaultWeaTable.class);
+        String sqlWhere = table.getSqlwhere();
+        String sqlForm = table.getSqlform();
+        String backFields = table.getBackfields();
+
+        List<AbstractWeaTableColumn> cols = table.getColumns();
+  
+        // 刷新dataKey中的旧table对象
+        WeaTableTools.setTableStringVal(dataKey,WeaTableTools.toTableString(table));
+
+        return param.getData();
+    }
+}
+```
 
 我们可以获取接口的请求参数，来进行业务判断，判断是不是我们要修改的表格
 
-![Pasted image 20260407100028.png](./files/Pasted_image_2026040707100028.png)
+![](files/Pasted%20image%2020260526093830.png)
 
 ```java
 String  wid = Util.null2String(params.get("wfid"));
@@ -31,7 +62,7 @@ WeaTableTools.setTableStringVal(dataKey,WeaTableTools.toTableString(table));
 
 - 可以获取到列，来对列进行修改，比如列宽什么的
 
-![Pasted image 20260407100150.png](./files/Pasted_image_2026040707100150.png)
+![](files/Pasted%20image%2020260526093930.png)
 
 ## 示例-修改文档浏览框的sql，限制只能浏览到某个文档
 
@@ -72,7 +103,7 @@ public String after(WeaAfterReplaceParam param) throws Exception {
 
 效果：
 
-![Pasted image 20260407100246.png](./files/Pasted_image_2026040707100246.png)
+![](files/Pasted%20image%2020260526093944.png)
 
 代码：
 
@@ -164,11 +195,11 @@ public class TodoTableIntercept {
 
 原因是在调用 WeaTableTools.parseWeaTableBasic() 方法时 root 对象缺少了 tabletype 属性，导致报错
 
-![Pasted image 20260407100346.png](./files/Pasted_image_2026040707100346.png)
+![](files/Pasted%20image%2020260526093958.png)
 
 解决方法是获取 WeaTableTools 类的源码，将类复制到自己的路径中，并修改源码如下图，在获取 DefaultWeaTable 对象时使用该类
 
-![Pasted image 20260407100401.png](./files/Pasted_image_2026040707100401.png)
+![](files/Pasted%20image%2020260526094037.png)
 
 ```java
 DefaultWeaTable table = com.customization.yll.liuzhousteel.intercept.impl.WeaTableTools.

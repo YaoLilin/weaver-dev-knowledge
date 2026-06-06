@@ -2,7 +2,7 @@
 
 建模查询批量编辑保存时需要做必填校验
 
-![](Pasted%20image%2020260421152032.png)
+![](./files/Pasted%20image%2020260421152032.png)
 ## 思路
 
 需要重写按钮的点击事件的逻辑，在事件内先执行自定义的逻辑，再执行原逻辑，也就是代理的操作
@@ -11,7 +11,7 @@
 
 这个没有包括下拉菜单
 
-![](Pasted%20image%2020260421152148.png)
+![](./files/Pasted%20image%2020260421152148.png)
 
 1.获取 WeaTop 组件参数
 
@@ -58,8 +58,8 @@ function findBatchSaveButtonProps(props) {
 
 在点击批量保存时先进行自定义校验，通过后再执行原逻辑
 
-![](Pasted%20image%2020260421152207.png)
-![](Pasted%20image%2020260421152215.png)
+![](./files/Pasted%20image%2020260421152207.png)
+![](./files/Pasted%20image%2020260421152215.png)
 ```javascript
 // 重写顶部下拉按钮中的保存按钮逻辑
 ecodeSDK.overwritePropsFnQueueMapSet('Menu.Item', {
