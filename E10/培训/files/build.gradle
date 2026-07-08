@@ -1,0 +1,100 @@
+group 'com.weaver.seconddev'
+version '1.0.0'
+description 'e10二开'
+
+// 应用到所有项目（包括根项目）
+allprojects {
+    apply plugin: 'java'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    compileJava {
+        options.encoding = 'UTF-8'
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+
+
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        mavenLocal()
+        mavenCentral()
+    }
+
+    // 添加 zipJar 任务，生成 build.zip 文件，可以用于上传到二开服务
+    tasks.register('zipJar', Zip) {
+        dependsOn jar
+        archiveFileName = 'build.zip'
+        destinationDirectory = layout.buildDirectory.dir("libs")
+
+        from jar.archiveFile
+    }
+
+    jar {
+        // 确保在执行jar任务之前先执行classes任务
+        dependsOn ':classes'
+        // 执行 jar 任务之后执行 zipJar 任务，生成 build.zip 文件
+        finalizedBy(zipJar)
+    }
+}
+
+// 应用到子模块
+subprojects { subproject ->
+    // 除 common 模块外，其它子模块都引入 common 模块的源码
+    if (subproject.name != 'common') {
+        dependencies {
+            implementation project(':common')
+        }
+    }
+
+    // 打包配置
+    if (subproject.name != 'common') {
+        jar {
+            archiveBaseName = "secondev-hnweaver-" + subproject.name
+        }
+    }
+
+    sourceSets {
+        main {
+            resources {
+                exclude '**'
+            }
+        }
+    }
+
+    jar {
+        manifest {
+            attributes 'weaver-ecode-seconddev-id': 'hnweaver-' + rootProject.version,
+                    'Implementation-Version': rootProject.version,
+                    'Implementation-Vendor-Id': rootProject.group,
+                    'Implementation-Title': rootProject.name
+        }
+        // 将源码打进jar包
+        from(subproject.sourceSets.main.java)
+    }
+
+    // 添加公共的依赖
+    dependencies {
+        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.3")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.13.3")
+        testImplementation("org.junit.platform:junit-platform-launcher:1.13.3")
+        testImplementation("org.mockito:mockito-core:5.18.0")
+        testImplementation("org.mockito:mockito-junit-jupiter:5.18.0")
+
+        // 添加二开服务拉取的清单依赖
+        def includeType = ['**/*.jar', '**/*.class']
+        implementation fileTree(dir: rootProject.projectDir.getPath() + '/secDevLib', includes: includeType)
+        // 项目二开自定义依赖
+        implementation fileTree(dir: subproject.projectDir.getPath() + "/out-dep", includes: includeType)
+
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
