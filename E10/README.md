@@ -24,8 +24,7 @@ E10表结构（需登录上海系统）：[配置运维 - 泛微网络 - 高效�
 
 **总部 AI 技能（重点）**，可使用 AI 进行需求分析、代码生成，包含了 E10 的开发知识库（前端 UI 组件、后端接口和工具等），使用说明：[e-code智能化开发工具包](https://weapp.eteams.cn/ecode/playground/doc/share/view/1294983423558557697)
 
-![](files/ecode-dev-tools-1.2.0.zip)
-
+![](files/ecode-dev-tools-1.3.1.zip)
 ## 开发规范
 
 [E10 开发规范](E10%20开发规范.md)
