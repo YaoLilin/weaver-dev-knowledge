@@ -1,5 +1,7 @@
 # 泛微开发知识汇总
-这是一个根据我多年泛微开发汇总的泛微开发知识，希望对你有帮助！
+这是一个根据我多年泛微开发汇总的泛微开发知识，希望对你有帮助！ 
+
+在线文档地址，你可以访问我的个人网站阅读泛微开发指南：[泛微开发 > 泛微开发知识汇总 - 姚礼林的博客](https://www.yaolilin.com/articles/view?path=%2Fapi%2Fdocs-static%2F%E6%B3%9B%E5%BE%AE%E5%BC%80%E5%8F%91%2FREADME.md)
 
 ## Ecology 9
 
